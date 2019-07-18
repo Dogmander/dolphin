@@ -299,6 +299,8 @@ add_library(core
   HW/WiimoteEmu/Speaker.h
   HW/WiimoteEmu/WiimoteEmu.cpp
   HW/WiimoteEmu/WiimoteEmu.h
+  HW/WiimoteEmu/Extension/BalanceBoard.cpp
+  HW/WiimoteEmu/Extension/BalanceBoard.h
   HW/WiimoteEmu/Extension/Classic.cpp
   HW/WiimoteEmu/Extension/Classic.h
   HW/WiimoteEmu/Extension/DrawsomeTablet.cpp
