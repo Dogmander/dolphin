@@ -283,6 +283,8 @@ add_executable(dolphin-emu
   TAS/StickWidget.h
   TAS/IRWidget.cpp
   TAS/IRWidget.h
+  TAS/BalanceBoardWidget.cpp
+  TAS/BalanceBoardWidget.h
   Updater.cpp
   Updater.h
 )
