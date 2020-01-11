@@ -1329,9 +1329,6 @@
     <ClInclude Include="HW\WiimoteReal\WiimoteReal.h">
       <Filter>HW %28Flipper/Hollywood%29\Wiimote\Real</Filter>
     </ClInclude>
-    <ClInclude Include="HW\WiimoteReal\WiimoteRealBase.h">
-      <Filter>HW %28Flipper/Hollywood%29\Wiimote\Real</Filter>
-    </ClInclude>
     <ClInclude Include="HW\WII_IPC.h">
       <Filter>HW %28Flipper/Hollywood%29\Wii IPC</Filter>
     </ClInclude>
