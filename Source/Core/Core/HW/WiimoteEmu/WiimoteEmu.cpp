@@ -27,6 +27,7 @@
 
 #include "Core/HW/WiimoteCommon/WiimoteConstants.h"
 #include "Core/HW/WiimoteCommon/WiimoteHid.h"
+#include "Core/HW/WiimoteEmu/Extension/BalanceBoard.h"
 #include "Core/HW/WiimoteEmu/Extension/Classic.h"
 #include "Core/HW/WiimoteEmu/Extension/DrawsomeTablet.h"
 #include "Core/HW/WiimoteEmu/Extension/Drums.h"
@@ -100,9 +101,10 @@ void Wiimote::Reset()
     file.read(reinterpret_cast<char*>(m_eeprom.data.data()), EEPROM_FREE_SIZE);
     file.close();
   }
-  else
+  else if (m_index != WIIMOTE_BALANCE_BOARD)
   {
     // Load some default data.
+    // Note that the balance board starts with all-0 EEPROM, while regular remotes have some data.
 
     // IR calibration:
     std::array<u8, 11> ir_calibration = {
@@ -163,8 +165,11 @@ void Wiimote::Reset()
 
   // Initialize i2c bus:
   m_i2c_bus.Reset();
-  m_i2c_bus.AddSlave(&m_speaker_logic);
-  m_i2c_bus.AddSlave(&m_camera_logic);
+  if (m_index != WIIMOTE_BALANCE_BOARD)
+  {
+    m_i2c_bus.AddSlave(&m_speaker_logic);
+    m_i2c_bus.AddSlave(&m_camera_logic);
+  }
 
   // Reset extension connections to NONE:
   m_is_motion_plus_attached = false;
@@ -174,6 +179,7 @@ void Wiimote::Reset()
 
   // Switch to desired M+ status and extension (if any).
   // M+ and EXT are reset on attachment.
+  // This also ensures that the balance board extension is attached if needed.
   HandleExtensionSwap();
 
   // Reset sub-devices.
@@ -249,6 +255,7 @@ Wiimote::Wiimote(const unsigned int index) : m_index(index)
   m_attachments->AddAttachment(std::make_unique<WiimoteEmu::UDrawTablet>());
   m_attachments->AddAttachment(std::make_unique<WiimoteEmu::DrawsomeTablet>());
   m_attachments->AddAttachment(std::make_unique<WiimoteEmu::TaTaCon>());
+  m_attachments->AddAttachment(std::make_unique<WiimoteEmu::BalanceBoard>());
 
   m_attachments->AddSetting(&m_motion_plus_setting, {_trans("Attach MotionPlus")}, true);
 
@@ -391,6 +398,13 @@ ControllerEmu::ControlGroup* Wiimote::GetDrawsomeTabletGroup(DrawsomeTabletGroup
 ControllerEmu::ControlGroup* Wiimote::GetTaTaConGroup(TaTaConGroup group) const
 {
   return static_cast<TaTaCon*>(m_attachments->GetAttachmentList()[ExtensionNumber::TATACON].get())
+      ->GetGroup(group);
+}
+
+ControllerEmu::ControlGroup* Wiimote::GetBalanceBoardGroup(BalanceBoardGroup group) const
+{
+  return static_cast<BalanceBoard*>(
+             m_attachments->GetAttachmentList()[ExtensionNumber::BALANCE_BOARD].get())
       ->GetGroup(group);
 }
 

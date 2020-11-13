@@ -161,6 +161,7 @@
     <ClCompile Include="HW\WiimoteEmu\EmuSubroutines.cpp" />
     <ClCompile Include="HW\WiimoteEmu\Encryption.cpp" />
     <ClCompile Include="HW\WiimoteEmu\ExtensionPort.cpp" />
+    <ClCompile Include="HW\WiimoteEmu\Extension\BalanceBoard.cpp" />
     <ClCompile Include="HW\WiimoteEmu\Extension\Classic.cpp" />
     <ClCompile Include="HW\WiimoteEmu\Extension\DrawsomeTablet.cpp" />
     <ClCompile Include="HW\WiimoteEmu\Extension\Drums.cpp" />
@@ -517,6 +518,7 @@
     <ClInclude Include="HW\WiimoteEmu\Dynamics.h" />
     <ClInclude Include="HW\WiimoteEmu\Encryption.h" />
     <ClInclude Include="HW\WiimoteEmu\ExtensionPort.h" />
+    <ClInclude Include="HW\WiimoteEmu\Extension\BalanceBoard.h" />
     <ClInclude Include="HW\WiimoteEmu\Extension\Classic.h" />
     <ClInclude Include="HW\WiimoteEmu\Extension\DrawsomeTablet.h" />
     <ClInclude Include="HW\WiimoteEmu\Extension\Drums.h" />
@@ -531,7 +533,6 @@
     <ClInclude Include="HW\WiimoteEmu\Speaker.h" />
     <ClInclude Include="HW\WiimoteEmu\WiimoteEmu.h" />
     <ClInclude Include="HW\WiimoteReal\WiimoteReal.h" />
-    <ClInclude Include="HW\WiimoteReal\WiimoteRealBase.h" />
     <ClInclude Include="HW\WiiSave.h" />
     <ClInclude Include="HW\WiiSaveStructs.h" />
     <ClInclude Include="HW\WII_IPC.h" />
